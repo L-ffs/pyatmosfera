@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <title>Entrar | Atmosfera</title>
+    <meta name="description" content="Entre no Atmosfera e acompanhe o tempo das suas cidades favoritas." />
+    <link rel="stylesheet" href="/theme.css" />
+    <link rel="stylesheet" href="/auth.css" />
+  </head>
+  <body>
+    <div class="sky" aria-hidden="true">
+      <div class="stars-far"></div>
+      <div class="stars"></div>
+      <div class="moon"></div>
+      <div class="clouds">
+        <span class="cloud"></span><span class="cloud dense"></span><span class="cloud"></span>
+        <span class="cloud dense"></span><span class="cloud"></span><span class="cloud dense"></span>
+      </div>
+    </div>
+
+    <main class="card auth-card">
+      <header class="brand">
+        <div class="brand-icon" aria-hidden="true">⛅</div>
+        <h1>Atmosfera</h1>
+        <p class="subtitle">Entre para acompanhar o tempo das suas cidades favoritas</p>
+      </header>
+
+      <form id="form" novalidate>
+        <p class="msg ok hidden" id="created" role="status">Conta criada! Entre para continuar.</p>
+
+        <div class="field">
+          <label for="email">E-mail</label>
+          <input id="email" name="email" type="email" autocomplete="email" placeholder="voce@exemplo.com" required />
+        </div>
+
+        <div class="field">
+          <label for="senha">Senha</label>
+          <div class="control has-toggle">
+            <input id="senha" name="senha" type="password" autocomplete="current-password" placeholder="••••••••" required />
+            <button type="button" class="toggle" data-target="senha" aria-pressed="false" aria-label="Mostrar senha">👁️</button>
+          </div>
+        </div>
+
+        <p class="msg error" id="error" role="alert"></p>
+        <button type="submit" class="btn" id="submit">Entrar</button>
+      </form>
+
+      <p class="alt">Não tem conta? <a href="/signup">Criar agora</a></p>
+    </main>
+
+    <script src="/api.js"></script>
+    <script src="/login.js"></script>
+  </body>
+</html>

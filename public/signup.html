@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <title>Criar conta | Atmosfera</title>
+    <meta name="description" content="Crie sua conta no Atmosfera e escolha as cidades que quer acompanhar." />
+    <link rel="stylesheet" href="/theme.css" />
+    <link rel="stylesheet" href="/auth.css" />
+  </head>
+  <body>
+    <div class="sky" aria-hidden="true">
+      <div class="stars-far"></div>
+      <div class="stars"></div>
+      <div class="moon"></div>
+      <div class="clouds">
+        <span class="cloud"></span><span class="cloud dense"></span><span class="cloud"></span>
+        <span class="cloud dense"></span><span class="cloud"></span><span class="cloud dense"></span>
+      </div>
+    </div>
+
+    <main class="card auth-card">
+      <header class="brand">
+        <div class="brand-icon" aria-hidden="true">⛅</div>
+        <h1>Criar conta</h1>
+        <p class="subtitle">Leva menos de um minuto. Depois é só escolher as cidades.</p>
+      </header>
+
+      <form id="form" novalidate>
+        <div class="field">
+          <label for="nome">Nome</label>
+          <input id="nome" name="nome" type="text" autocomplete="given-name" placeholder="Como quer ser chamado" required />
+          <p class="error" id="err-nome"></p>
+        </div>
+
+        <div class="field">
+          <label for="email">E-mail</label>
+          <input id="email" name="email" type="email" autocomplete="email" placeholder="voce@exemplo.com" required />
+          <p class="error" id="err-email"></p>
+        </div>
+
+        <div class="field">
+          <label for="senha">Senha</label>
+          <div class="control has-toggle">
+            <input id="senha" name="senha" type="password" autocomplete="new-password" placeholder="Mínimo de 8 caracteres" required />
+            <button type="button" class="toggle" data-target="senha" aria-pressed="false" aria-label="Mostrar senha">👁️</button>
+          </div>
+          <p class="error" id="err-senha"></p>
+        </div>
+
+        <div class="field">
+          <label for="confirmar">Confirmar senha</label>
+          <div class="control has-toggle">
+            <input id="confirmar" name="confirmar" type="password" autocomplete="new-password" placeholder="Repita a senha" required />
+            <button type="button" class="toggle" data-target="confirmar" aria-pressed="false" aria-label="Mostrar senha">👁️</button>
+          </div>
+          <p class="error" id="err-confirmar"></p>
+        </div>
+
+        <p class="msg error" id="error" role="alert"></p>
+        <button type="submit" class="btn" id="submit">Criar conta</button>
+      </form>
+
+      <p class="alt">Já tem conta? <a href="/">Entrar</a></p>
+    </main>
+
+    <script src="/api.js"></script>
+    <script src="/signup.js"></script>
+  </body>
+</html>

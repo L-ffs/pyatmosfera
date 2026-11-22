@@ -1,0 +1,4 @@
+# Copie para .dev.vars (não vai para o GitHub) e preencha.
+SESSION_SECRET=troque-por-um-texto-aleatorio-com-pelo-menos-32-caracteres
+FIRESTORE_PROJECT_ID=id-do-seu-projeto-firebase
+FIRESTORE_COLLECTION=users

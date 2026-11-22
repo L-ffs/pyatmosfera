@@ -1,0 +1,105 @@
+/* Tela inicial: cidades favoritas e busca. */
+body { overflow-x: hidden; }
+
+.topbar, .page { position: relative; z-index: 2; }
+
+.topbar {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
+  gap: .75rem 1rem;
+  padding: 1rem clamp(1rem, 4vw, 2rem);
+  border-bottom: 1px solid var(--line);
+  background: rgba(7, 11, 28, .55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.logo { font-family: var(--font-head); font-size: 1.2rem; font-weight: 700; letter-spacing: -.01em; }
+.account { display: flex; align-items: center; flex-wrap: wrap; gap: .6rem; }
+.account-name { color: var(--muted); font-size: .9rem; margin-right: .25rem; }
+
+.page {
+  width: min(70rem, 100%);
+  margin-inline: auto;
+  padding: clamp(1rem, 4vw, 2rem);
+  display: grid;
+  gap: 2rem;
+}
+
+.section-title { font-size: 1.25rem; margin-bottom: 1rem; }
+
+/* ---------- Busca ---------- */
+.search { padding: 1.25rem 1.5rem; display: grid; gap: .75rem; }
+.search h2 { font-size: 1.05rem; }
+.results { list-style: none; display: grid; gap: .35rem; }
+.result {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: .6rem .75rem;
+  border: 1px solid var(--line); border-radius: .75rem;
+  background: rgba(234, 240, 255, .05);
+  font-size: .92rem;
+}
+.result small { color: var(--muted); display: block; }
+
+/* ---------- Cartões de clima ---------- */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: 1rem; }
+
+.weather-card { padding: 1.15rem 1.25rem; display: grid; gap: .6rem; align-content: start; }
+.weather-top { display: flex; align-items: flex-start; justify-content: space-between; gap: .5rem; }
+.city-name { font-size: 1.05rem; font-weight: 600; }
+.city-place { font-size: .8rem; color: var(--muted); }
+.remove {
+  background: none; border: 0; color: var(--muted);
+  font-size: 1.4rem; line-height: 1; cursor: pointer;
+  padding: .1rem .45rem; border-radius: .5rem;
+}
+.remove:hover { color: var(--danger); background: rgba(255, 138, 138, .1); }
+
+.now { display: flex; align-items: center; gap: .75rem; }
+.now-icon { font-size: 2.4rem; line-height: 1; }
+.temp { font-family: var(--font-head); font-size: 2.4rem; font-weight: 600; line-height: 1; color: var(--primary); }
+.temp small { font-size: 1.1rem; color: var(--muted); font-weight: 400; }
+.condition { font-size: .9rem; color: var(--text); }
+.details { display: flex; flex-wrap: wrap; gap: .25rem 1rem; font-size: .82rem; color: var(--muted); }
+
+.more {
+  justify-self: start; padding: 0; background: none; border: 0;
+  color: var(--primary); font: inherit; font-size: .85rem; cursor: pointer;
+}
+.more:hover { text-decoration: underline; }
+
+.forecast { list-style: none; display: grid; gap: .2rem; font-size: .85rem; }
+.forecast li {
+  display: grid; grid-template-columns: 3.6rem 1.6rem 1fr auto; align-items: center; gap: .5rem;
+  padding: .3rem 0; border-top: 1px solid var(--line);
+}
+.forecast .day { color: var(--muted); text-transform: capitalize; }
+.forecast .range { white-space: nowrap; }
+
+.weather-card.unavailable .unavailable-text { color: var(--muted); font-size: .9rem; }
+.empty { grid-column: 1 / -1; color: var(--muted); padding: 1rem 0; }
+
+.skeleton {
+  height: 9rem; border-radius: calc(var(--radius) * 1.5);
+  background: linear-gradient(90deg, var(--sky-mid) 25%, var(--sky-glow) 50%, var(--sky-mid) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  opacity: .6;
+}
+@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+@media (prefers-reduced-motion: reduce) { .skeleton { animation: none; } }
+
+/* ---------- Trocar senha ---------- */
+.dialog {
+  width: min(24rem, calc(100% - 2rem)); padding: 1.75rem;
+  margin: auto; color: var(--text);
+  background: rgba(14, 22, 46, .96);
+}
+.dialog::backdrop { background: rgba(3, 6, 16, .7); }
+.dialog form { display: grid; gap: 1rem; }
+.dialog h2 { font-size: 1.25rem; }
+.dialog .field { display: grid; gap: .4rem; }
+.dialog-actions { display: flex; justify-content: flex-end; gap: .6rem; }
+
+@media (max-width: 30rem) {
+  .moon { top: 3%; right: 6%; }
+  .account-name { flex-basis: 100%; }
+}
