@@ -13,7 +13,7 @@ class AuthService:
         self._sessions = sessions
 
     async def signup(self, name: str, email: str, password: str) -> User:
-        user = User(email=email, name=name, password_hash=self._hasher.hash(password))
+        user = User(email=email, name=name, password_hash=await self._hasher.hash(password))
         if not await self._users.add(user):
             raise EmailAlreadyExists()
         return user
@@ -22,9 +22,9 @@ class AuthService:
         user = await self._users.find_by_email(email)
         if user is None:
             # gasta o mesmo tempo de uma verificação real para não revelar quais e-mails existem
-            self._hasher.verify(password, self._hasher.hash("atmosfera"))
+            await self._hasher.verify(password, await self._hasher.hash("atmosfera"))
             raise InvalidCredentials()
-        if not self._hasher.verify(password, user.password_hash):
+        if not await self._hasher.verify(password, user.password_hash):
             raise InvalidCredentials()
         return user, self._sessions.issue(user.email)
 
@@ -36,7 +36,7 @@ class AuthService:
 
     async def change_password(self, email: str, current: str, new: str) -> None:
         user = await self.get_user(email)
-        if not self._hasher.verify(current, user.password_hash):
+        if not await self._hasher.verify(current, user.password_hash):
             raise WrongCurrentPassword()
-        user.password_hash = self._hasher.hash(new)
+        user.password_hash = await self._hasher.hash(new)
         await self._users.save_password_hash(user)
