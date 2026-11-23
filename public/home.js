@@ -143,6 +143,7 @@ async function loadFavorites() {
 
 // ── Remover favorita (RF6) ──────────────────────────────────
 async function removeCity(city, card) {
+  if (!window.confirm("Remover " + city.name + " dos favoritos?")) return;
   card.style.opacity = ".5";
   card.style.pointerEvents = "none";
   try {

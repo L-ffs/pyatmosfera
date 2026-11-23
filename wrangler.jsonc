@@ -15,6 +15,7 @@
   // Variáveis não secretas. O segredo SESSION_SECRET é cadastrado no painel da Cloudflare.
   "vars": {
     "FIRESTORE_PROJECT_ID": "atmosfera-f4c87",
-    "FIRESTORE_COLLECTION": "users"
+    "FIRESTORE_COLLECTION": "users",
+    "WEATHER_CACHE_SECONDS": "300"
   }
 }
