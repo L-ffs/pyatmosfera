@@ -4,16 +4,20 @@ from dataclasses import dataclass
 
 
 def _read(env, name: str, default: str | None = None) -> str | None:
-    """Lê `name` de `env` (mapa ou objeto de bindings) e, se faltar, de os.environ."""
+    """Lê `name` dos bindings do Workers (objeto ou mapa) e, se faltar, de os.environ."""
     value = None
     if env is not None:
-        try:
-            value = env[name] if hasattr(env, "__getitem__") else getattr(env, name, None)
-        except (KeyError, TypeError):
-            value = getattr(env, name, None)
+        value = getattr(env, name, None)
+        if value is None:
+            try:
+                value = env[name]
+            except (KeyError, TypeError, AttributeError, IndexError):
+                value = None
     if value is None:
         value = os.environ.get(name)
-    return str(value) if value is not None else default
+    if value is None or str(value) in ("undefined", "null"):
+        return default
+    return str(value)
 
 
 def _text(env, name: str, default: str) -> str:
@@ -36,10 +40,12 @@ class Settings:
     def load(cls, env=None) -> "Settings":
         secret = _read(env, "SESSION_SECRET")
         project = _read(env, "FIRESTORE_PROJECT_ID")
-        if not secret or len(secret) < 32:
-            raise RuntimeError("SESSION_SECRET ausente ou com menos de 32 caracteres.")
+        if not secret:
+            raise RuntimeError("SESSION_SECRET não foi encontrada no ambiente do Worker.")
+        if len(secret) < 32:
+            raise RuntimeError(f"SESSION_SECRET tem {len(secret)} caracteres; são necessários 32 ou mais.")
         if not project:
-            raise RuntimeError("FIRESTORE_PROJECT_ID ausente.")
+            raise RuntimeError("FIRESTORE_PROJECT_ID não foi encontrada no ambiente do Worker.")
         return cls(
             session_secret=secret,
             firestore_project_id=project,
